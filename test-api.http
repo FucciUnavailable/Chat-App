@@ -1,0 +1,4 @@
+app.get('/hello', (req, res) => {
+    res.send('Hello, REST Client!');
+});
+GET http://localhost:3000/hello

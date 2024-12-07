@@ -1,0 +1,39 @@
+{
+  "name": "chat-app",
+  "version": "1.0.0",
+  "description": "creating a chat app to learn more advanced node.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "test",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-mongo": "~3.2.0",
+    "cookie-parser": "~1.4.5",
+    "dotenv": "^8.6.0",
+    "express": "^4.16.1",
+    "express-session": "~1.17.1",
+    "mongodb": "^3.6.1",
+    "passport": "^0.4.1",
+    "passport-github": "~1.1.0",
+    "passport-local": "~1.0.0",
+    "passport.socketio": "~3.7.0",
+    "pug": "~3.0.0",
+    "socket.io": "~2.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/\"fucciunavailable/Chat-App.git\".git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "Fucci",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/\"fucciunavailable/Chat-App.git\"/issues"
+  },
+  "homepage": "https://github.com/\"fucciunavailable/Chat-App.git\"#readme"
+}

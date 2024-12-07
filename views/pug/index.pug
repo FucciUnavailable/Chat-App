@@ -1,0 +1,52 @@
+html
+  head
+    title Fucci Katze
+    meta(name='description', content='Home page')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/public/css/style.css')
+  body
+    .container
+      header.header
+        h1.logo Fucci Katze
+        p.subtitle Welcome to the coolest platform!
+      
+      main.main-content
+        if showLogin
+          .box.login-box
+            .icon-container
+              img(src='/public/login-icon.png', alt='Login Icon')
+            h2 Login
+            form.login-form(action='/login', method='post')
+              .form-group
+                label(for='username') Username
+                input#username(type='text', name='username', placeholder='Enter your username', required)
+              .form-group
+                label(for='password') Password
+                input#password(type='password', name='password', placeholder='Enter your password', required)
+              .form-group
+                button.btn-primary(type='submit') Log In
+            .social-login
+              p.center-text Or login with:
+              a.social-btn(href='/auth/github')
+                img(src='/public/github-icon.png', alt='GitHub')
+                | GitHub
+
+        if showRegistration
+          .box.register-box
+            .icon-container
+              img(src='/public/register-icon.png', alt='Register Icon')
+            h2 Register
+            form.register-form(action='/register', method='post')
+              .form-group
+                label(for='reg-username') Username
+                input#reg-username(type='text', name='username', placeholder='Choose a username', required)
+              .form-group
+                label(for='reg-password') Password
+                input#reg-password(type='password', name='password', placeholder='Choose a password', required)
+              .form-group
+                button.btn-secondary(type='submit') Register
+
+      footer.footer
+        p.center-text &copy; 2024 Fucci Katze. All rights reserved.

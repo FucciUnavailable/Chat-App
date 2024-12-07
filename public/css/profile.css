@@ -1,0 +1,115 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Container */
+  .container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  /* Header */
+  .header {
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    font-size: 2.5rem;
+    color: #007bff;
+    font-weight: bold;
+  }
+  
+  #welcome {
+    font-size: 1.5rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  /* Profile Section */
+  .profile-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .email {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  
+  /* Logout Button */
+  .logout-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .container {
+      width: 90%;
+    }
+  
+    .profile-container {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .profile-img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .name {
+      font-size: 1rem;
+    }
+  
+    .email {
+      font-size: 0.9rem;
+    }
+  }
+  
