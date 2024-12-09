@@ -10,11 +10,19 @@ $(document).ready(function () {
       $('#messages').append($('<li>').html('<b>' + message + '</b>'));
   });
 
-  socket.on('chat message', data => {
-      console.log('socket.on 1')
-      $('#messages').append($('<li>').text(`${data.username}: ${data.message}`));
-  })
-
+  socket.on('chat message', function(msg) {
+    const chatBox = document.getElementById('messages');
+    const newMessage = document.createElement('li');
+    newMessage.textContent = msg;
+    chatBox.appendChild(newMessage);
+  
+    // Automatically scroll to the bottom
+    scrollToBottom();
+  });
+  
+  
+// Call scrollToBottom() after initial messages are loaded
+window.onload = scrollToBottom;
   // Form submittion with new message in field with id 'm'
   $('form').submit(function () {
       let messageToSend = $('#m').val();
@@ -23,4 +31,5 @@ $(document).ready(function () {
       $('#m').val('');
       return false; // prevent form submit from refreshing page
   });
+  
 });

@@ -14,6 +14,8 @@ const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
 const URI = process.env.MONGO_URI;
 const store = new MongoStore({ url: URI });
+const GitHubStrategy = require('passport-github').Strategy;
+
 
 app.set('view engine', 'pug');
 app.set('views', './views/pug');
@@ -47,7 +49,6 @@ io.use(
     fail: onAuthorizeFail
   })
 );
-
 
 function onAuthorizeSuccess(data, accept) {
   console.log('successful connection to socket.io');

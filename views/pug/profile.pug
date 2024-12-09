@@ -1,13 +1,15 @@
 html
   head
-    title Fucci Katze - Profile
-    meta(name='description', content='User Profile')
+    title Fucci Katze - Profile and Chat
+    meta(name='description', content='User Profile and Chat')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/public/css/profile.css')
+    link(rel='stylesheet', href='/public/css/chat.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css', integrity='sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMRLpXX3r70dddpMfFj5RUx5jnj1W6+o9KG9Fzo', crossorigin='anonymous')
   body
     .container
+      // Profile Section
       header.header
         h1.logo Fucci Katze
         h2#welcome Welcome, #{username}!
@@ -15,10 +17,45 @@ html
       .profile-container
         .profile-info
           img.profile-img(src='/public/images/default-profile.png', alt='Profile Picture')
-          p.name #{username}
-          p.email Email: #{email}
+          .profile-text
+            h3.name #{username}
+            p.email
+              i.fas.fa-envelope
+              | Email: #{email}
+        a.logout-btn(href='/logout')
+          i.fas.fa-sign-out-alt
+          | Logout
 
-      a.logout-btn(href='/logout') Logout
+      // Friends List Section
+      .friends-container
+        h2 Friends
+        ul.friends-list
+          li.friend
+            img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
+            span.friend-name John Doe
+          li.friend
+            img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
+            span.friend-name Jane Smith
+          li.friend
+            img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
+            span.friend-name Alex Johnson
+        a.add-friend(href='#')
+          i.fas.fa-user-plus
+          | Add Friend
 
+      // Chat Section
+      .chat-container
+        h2 Chat Options
+        .chat-buttons
+          a.chat-btn(href='/chat')
+            i.fas.fa-comments
+            | General Chat
+          form.private-room-form(action='/private', method='POST')
+            input#room-id(type='text', name='roomId', placeholder='Enter Room ID')
+            button.private-btn(type='submit')
+              i.fas.fa-door-closed
+              | Join Private Room
+
+    // Scripts
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=', crossorigin='anonymous')
-    script(src='/public/js/profile.js')
+    script(src='/public/js/chat.js')
