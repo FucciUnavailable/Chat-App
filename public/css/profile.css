@@ -1,86 +1,111 @@
-/* General Styling */
+/* profile.css */
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #f7f7f7;
+  font-family: 'Arial', sans-serif;
+  background-color: #2c2f33;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.container {
-  width: 80%;
-  margin: auto;
-  padding: 20px;
-}
-
-/* Header */
 .header {
-  text-align: center;
-  margin-bottom: 20px;
+  width: 100%;
+  background-color: #23272a;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .header .logo {
-  font-size: 2.5rem;
-  color: #333;
-}
-
-.header #welcome {
-  font-size: 1.2rem;
-  color: #555;
-}
-
-/* Profile Section */
-.profile-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-}
-
-.profile-info {
-  display: flex;
-  align-items: center;
-}
-
-.profile-info img.profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-right: 15px;
-  border: 2px solid #ccc;
-}
-
-.profile-text .name {
   font-size: 1.5rem;
-  margin: 0;
-  color: #333;
+  color: #7289da;
 }
 
-.profile-text .email {
-  color: #666;
+.navbar {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #7289da;
+  color: #ffffff;
 }
 
 .logout-btn {
   display: flex;
   align-items: center;
-  background: #ff4c4c;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
+  gap: 5px;
+}
+
+.main-content {
+  width: 90%;
+  max-width: 1000px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-section, .friends-section, .chat-section {
+  background-color: #23272a;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.section-title {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #7289da;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #7289da;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.edit-profile-btn {
+  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+  background-color: #7289da;
+  padding: 8px 15px;
   text-decoration: none;
-  transition: background 0.3s ease;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-.logout-btn:hover {
-  background: #e03e3e;
-}
-
-/* Friends List */
-.friends-container {
-  margin-bottom: 30px;
-}
-
-.friends-container h2 {
-  margin-bottom: 15px;
+.edit-profile-btn:hover {
+  background-color: #5b6eae;
 }
 
 .friends-list {
@@ -88,82 +113,96 @@ body {
   padding: 0;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.friends-list .friend {
+.friend {
   display: flex;
   align-items: center;
-  margin-right: 20px;
-  margin-bottom: 10px;
+  gap: 10px;
+  padding: 10px;
+  background-color: #2c2f33;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-.friends-list .friend-img {
+.friend:hover {
+  background-color: #3b4148;
+}
+
+.friend-img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  margin-right: 10px;
 }
 
-.add-friend {
-  display: flex;
-  align-items: center;
+.add-friend-btn {
   margin-top: 10px;
-  color: #333;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #ffffff;
+  background-color: #43b581;
+  padding: 8px 15px;
   text-decoration: none;
-  transition: color 0.3s ease;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
 }
 
-.add-friend:hover {
-  color: #007bff;
-}
-
-/* Chat Section */
-.chat-container {
-  margin-top: 30px;
+.add-friend-btn:hover {
+  background-color: #2ea763;
 }
 
 .chat-buttons {
   display: flex;
+  flex-direction: column;
   gap: 15px;
 }
 
-.chat-btn,
-.private-btn {
-  display: flex;
-  align-items: center;
-  background: #007bff;
-  color: #fff;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  border: none;
-  transition: background 0.3s ease;
-  cursor: pointer;
-}
-
-.chat-btn:hover,
-.private-btn:hover {
-  background: #0056b3;
-}
-
-.private-room-form {
-  display: flex;
+.chat-btn, .private-btn {
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 10px;
-}
-
-.private-room-form input {
-  padding: 8px;
-  border: 1px solid #ccc;
+  color: #ffffff;
+  background-color: #7289da;
+  padding: 10px 15px;
+  text-decoration: none;
   border-radius: 5px;
-  width: 200px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
-.private-room-form button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
+.chat-btn:hover, .private-btn:hover {
+  background-color: #5b6eae;
+}
+
+input#room-id {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #2c2f33;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.decorative-section {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.decorative-section .tagline {
+  font-size: 1.25rem;
+  color: #7289da;
+}
+
+.decorative-section .decorative-img {
+  margin-top: 10px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
 }
