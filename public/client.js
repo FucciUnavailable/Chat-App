@@ -12,29 +12,33 @@ $(document).ready(function () {
     });
   
     // Listening for incoming chat messages
-    socket.on('chat message', function(data) {
-        console.log(data);  // Log message object to see its structure
-        const chatBox = document.getElementById('messages');
-        const newMessage = document.createElement('li');
-
-        // Create a timestamp for each message
-        const timestamp = new Date().toLocaleTimeString();
-
-        // Format the message with some CSS classes for style
-        newMessage.innerHTML = `
-          <div class="message-container">
+    socket.on('chat message', function (data) {
+      console.log(data); // Log message object to see its structure
+      const chatBox = document.getElementById('messages');
+      const newMessage = document.createElement('li');
+  
+      // Create a timestamp for each message
+      const timestamp = new Date().toLocaleTimeString();
+  
+      // Format the message with some CSS classes for style, including avatars
+      newMessage.innerHTML = `
+        <div class="message-container">
+          <img class="avatar" src="${data.avatar || 'default-avatar.png'}" alt="${data.username}" />
+          <div class="message-content">
             <span class="username"><b>${data.username}</b></span>
             <span class="message-text">${data.message}</span>
             <span class="timestamp">${timestamp}</span>
           </div>
-        `;
-
-        // Append the new message to the chat
-        chatBox.appendChild(newMessage);
-
-        // Automatically scroll to the bottom of the chat container
-        scrollToBottom();
-    });
+        </div>
+      `;
+  
+      // Append the new message to the chat
+      chatBox.appendChild(newMessage);
+  
+      // Automatically scroll to the bottom of the chat container
+      newMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+  });
+  
   
     // Function to automatically scroll to the bottom of the chat container
     function scrollToBottom() {

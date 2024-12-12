@@ -1,8 +1,9 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #36393f;
   margin: 0;
   padding: 0;
+  color: #dcddde;
 }
 
 .container {
@@ -12,12 +13,13 @@ body {
 }
 
 .header {
-  background-color: #1a1a1a;
+  background-color: #202225;
   color: white;
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #2f3136;
 }
 
 .navbar a.nav-btn {
@@ -25,12 +27,12 @@ body {
   text-decoration: none;
   margin-right: 10px;
   padding: 8px 15px;
-  background-color: #007bff;
+  background-color: #5865f2;
   border-radius: 5px;
 }
 
 .navbar a.nav-btn:hover {
-  background-color: #0056b3;
+  background-color: #4752c4;
 }
 
 .layout {
@@ -40,8 +42,32 @@ body {
 
 .sidebar {
   width: 20%;
-  background-color: #f0f0f0;
+  background-color: #2f3136;
   padding: 15px;
+  color: #b9bbbe;
+  border-right: 1px solid #202225;
+}
+
+.sidebar h2 {
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sidebar ul li:hover {
+  background-color: #393c43;
 }
 
 .chat-area {
@@ -49,13 +75,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: white;
-}
-
-.activity-panel {
-  width: 25%;
-  background-color: #f9f9f9;
-  padding: 15px;
+  background-color: #36393f;
 }
 
 .chat-box-container ul#messages {
@@ -64,46 +84,116 @@ body {
   margin: 0;
   overflow-y: auto;
   max-height: 400px; /* Set to the desired height */
-  border: 1px solid #ccc;
+  background-color: #2f3136;
+  border: 1px solid #202225;
   border-radius: 5px;
-  background-color: #fff;
-  scrollbar-width: none; /* For Firefox */
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #5865f2 #2f3136; /* For Firefox */
 }
 
 .chat-box-container ul#messages::-webkit-scrollbar {
-  display: none; /* For Chrome, Safari, and Edge */
+  width: 8px; /* For Chrome, Safari, and Edge */
 }
-button {
-  cursor: pointer;
+
+.chat-box-container ul#messages::-webkit-scrollbar-thumb {
+  background-color: #5865f2;
+  border-radius: 5px;
+}
+
+.chat-box-container ul#messages::-webkit-scrollbar-track {
+  background-color: #2f3136;
 }
 
 /* Chat message container */
 .message-container {
   display: flex;
-  flex-direction: column;
-  padding: 8px;
+  align-items: flex-start;
   margin-bottom: 10px;
-  background-color: #f1f1f1;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Username style */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background-color: #5865f2;
+  flex-shrink: 0;
+}
+
+.message-content {
+  background-color: #40444b;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #dcddde;
+}
+
 .username {
   font-weight: bold;
-  color: #007bff; /* Blue color for usernames */
+  color: #fff;
+  margin-bottom: 5px;
 }
 
-/* Message text style */
 .message-text {
   font-size: 14px;
-  color: #333;
-  margin: 5px 0;
+  line-height: 1.5;
 }
 
-/* Timestamp style */
 .timestamp {
   font-size: 12px;
-  color: #aaa;
+  color: #72767d;
+  margin-left: 10px;
+}
+
+.message-container:hover .message-content {
+  background-color: #484c52;
+}
+
+/* Avatar Style */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+/* Message Content Styling */
+.message-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #2f3136;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.message-text {
+  font-size: 14px;
+  color: #dcddde;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #72767d;
   align-self: flex-end;
+}
+
+/* Fade-In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
