@@ -102,6 +102,11 @@ module.exports = function (app, myDataBase) {
     res.render('private', { username: req.user.username, roomId });
   });
 
+    // Dynamic Edit PRofile Route
+    app.get('/edit-profile', ensureAuthenticated, (req, res) => {
+      const roomId = req.params.roomId;
+      res.render('edit-profile', { username: req.user});
+    });
   // 404 Handler
   app.use((req, res) => {
     res.status(404).type('text').send('Not Found');

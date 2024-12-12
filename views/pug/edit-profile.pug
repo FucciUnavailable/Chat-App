@@ -1,0 +1,43 @@
+html
+  head
+    title Edit Profile - Fucci Katze
+    meta(name='description', content='Edit Profile Page')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/public/css/edit-profile.css')
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css', integrity='sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMRLpXX3r70dddpMfFj5RUx5jnj1W6+o9KG9Fzo', crossorigin='anonymous')
+  body
+    .container
+      header.header
+        h1.logo Fucci Katze
+        a.nav-link(href='/profile') Back to Profile
+
+      .edit-profile-form-container
+        h2.section-title Edit Your Profile
+        form.edit-profile-form(action='/profile/edit', method='POST', enctype='multipart/form-data')
+          .form-group
+            label(for='profile-picture') Profile Picture
+            input#profile-picture(type='file', name='profilePicture')
+          .form-group
+            label(for='username') Username
+            input#username(type='text', name='username', value='', placeholder='Enter new username', required)
+          .form-group
+            label(for='email') Email
+            input#email(type='email', name='email', value='', placeholder='Enter new email', required)
+          .form-group
+            label(for='password') Password
+            input#password(type='password', name='password', placeholder='Enter new password')
+          .form-group
+            label(for='bio') Bio
+            textarea#bio(name='bio', placeholder='Tell us about yourself') #{bio}
+          .form-actions
+            button.save-btn(type='submit')
+              i.fas.fa-save
+              | Save Changes
+            a.cancel-btn(href='/profile')
+              i.fas.fa-times
+              | Cancel
+
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=', crossorigin='anonymous')
+    script(src='/public/js/edit-profile.js')
