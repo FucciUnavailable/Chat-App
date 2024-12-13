@@ -2,6 +2,41 @@ $(document).ready(function () {
     /*global io*/
     let socket = io();
   
+
+
+
+   // Listen for chat history (messages) from the server
+   socket.on('chat history', function (messages) {
+    // Render each message in the chat history
+    messages.forEach(function (message) {
+        const chatBox = document.getElementById('messages');
+        const newMessage = document.createElement('li');
+        
+        // Create a timestamp for each message
+        const timestamp = new Date().toLocaleTimeString();
+
+        // Format the message with some CSS classes for style, including avatars
+        newMessage.innerHTML = `
+          <div class="message-container">
+            <img class="avatar" src="${message.avatar || 'default-avatar.png'}" alt="${message.username}" />
+            <div class="message-content">
+              <span class="username"><b>${message.username}</b></span>
+              <span class="message-text">${message.message}</span>
+              <span class="timestamp">${timestamp}</span>
+            </div>
+          </div>
+        `;
+
+        // Append the new message to the chat
+        chatBox.appendChild(newMessage);
+    });
+
+    // Scroll to the bottom of the chat
+    scrollToBottom();
+});
+
+
+
     // Listening for user join/leave events
     socket.on('user', data => {
       $('#num-users').text(data.currentUsers + ' users online');
@@ -16,7 +51,7 @@ $(document).ready(function () {
       console.log(data); // Log message object to see its structure
       const chatBox = document.getElementById('messages');
       const newMessage = document.createElement('li');
-  
+      
       // Create a timestamp for each message
       const timestamp = new Date().toLocaleTimeString();
   
