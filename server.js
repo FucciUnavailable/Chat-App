@@ -97,8 +97,9 @@ myDB(async (client) => {
         username: socket.request.user.username,
         message: message,
         avatar: socket.request.user.avatar || "default-avatar.png",
-        
+        timestamp: new Date()
       };
+      console.log(messageData)
       // Save the message to Redis (lPush to add it to the left of the list)
       redisClient
         .lPush("chat_history", JSON.stringify(messageData), () => {
