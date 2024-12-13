@@ -254,3 +254,19 @@ button.btn-primary {
 button.btn-primary:hover {
   background-color: #5b6eae;
 }
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.green {
+  background-color: green;
+}
+
+.gray {
+  background-color: gray;
+}

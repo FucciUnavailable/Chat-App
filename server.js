@@ -72,20 +72,35 @@ myDB(async (client) => {
   auth(app, myDataBase);
   connectRedis();
   let currentUsers = 0;
+  let onlineUsers = []; // Keep track of online users
+
   io.on("connection", (socket) => {
     ++currentUsers;
+
+    // Check if the user is already in the onlineUsers array
+    const userExists = onlineUsers.some(
+      (user) => user.username === socket.request.user.username
+    );
+
+    if (!userExists) {
+      // Add the user to the onlineUsers array if they are not already there
+      onlineUsers.push({
+        username: socket.request.user.username,
+        connected: true,
+      });
+    }
     io.emit("user", {
       username: socket.request.user.username,
       currentUsers,
       connected: true,
+      onlineUsers: onlineUsers.map((user) => user.username), // List of usernames
     });
-    console.log("A user has connected: ", socket.request.user.username);
-    // Get the chat history from Redis when the user joins
+
     redisClient
       .lRange("chat_history", 0, -1) // Fetch the entire chat history
       .then((messages) => {
-          // Parse the messages since they are stored as strings in Redis
-      const parsedMessages = messages.map((message) => JSON.parse(message));
+        // Parse the messages since they are stored as strings in Redis
+        const parsedMessages = messages.map((message) => JSON.parse(message));
         // Emit chat history to the client
         socket.emit("chat history", parsedMessages.reverse()); // Reverse for chronological order
       })
@@ -97,13 +112,12 @@ myDB(async (client) => {
         username: socket.request.user.username,
         message: message,
         avatar: socket.request.user.avatar || "default-avatar.png",
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      console.log(messageData)
       // Save the message to Redis (lPush to add it to the left of the list)
       redisClient
         .lPush("chat_history", JSON.stringify(messageData), () => {
-          redis.expire("chat_history", 3600); // Expires in 1 hour  
+          redis.expire("chat_history", 3600); // Expires in 1 hour
         })
         .then(() => {
           // Optionally set a TTL (Time to Live) for the chat history
@@ -120,12 +134,20 @@ myDB(async (client) => {
     });
 
     socket.on("disconnect", () => {
+      // Find the user in the onlineUsers array and update the status
+      const userIndex = onlineUsers.findIndex(
+        (user) => user.username === socket.request.user.username
+      );
+      if (userIndex !== -1) {
+        onlineUsers[userIndex].connected = false; // Mark the user as disconnected
+      }
       console.log("A user has disconnected");
       --currentUsers;
       io.emit("user", {
         username: socket.request.user.username,
         currentUsers,
         connected: true,
+        onlineUsers: onlineUsers.map((user) => user.username), // Updated list of users
       });
     });
   });
