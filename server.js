@@ -15,7 +15,9 @@ const MongoStore = require("connect-mongo")(session);
 const URI = process.env.MONGO_URI;
 const store = new MongoStore({ url: URI });
 const GitHubStrategy = require("passport-github").Strategy;
-const { redisClient, getMessagesFromCache } = require("./redis");
+const { redisClient, getMessagesFromCache, connectRedis } = require("./redis");
+const { SocketAddress } = require("net");
+const { timeStamp } = require("console");
 
 app.set("view engine", "pug");
 app.set("views", "./views/pug");
@@ -68,47 +70,54 @@ myDB(async (client) => {
 
   routes(app, myDataBase);
   auth(app, myDataBase);
-
+  connectRedis();
   let currentUsers = 0;
   io.on("connection", (socket) => {
     ++currentUsers;
-
-  // Get cached messages from Redis when a user connects
-  getMessagesFromCache().then((messages) => {
-    console.log("got this message from history", messages)
-    socket.emit('chat history', messages); // Send all messages to the client upon connection
-  });
     io.emit("user", {
       username: socket.request.user.username,
       currentUsers,
       connected: true,
     });
-    socket.on("chat message", (message) => {  
+    console.log("A user has connected: ", socket.request.user.username);
+    // Get the chat history from Redis when the user joins
+    redisClient
+      .lRange("chat_history", 0, -1) // Fetch the entire chat history
+      .then((messages) => {
+          // Parse the messages since they are stored as strings in Redis
+      const parsedMessages = messages.map((message) => JSON.parse(message));
+        // Emit chat history to the client
+        socket.emit("chat history", parsedMessages.reverse()); // Reverse for chronological order
+      })
+      .catch((err) => {
+        console.error("Error fetching chat history from Redis:", err);
+      });
+    socket.on("chat message", (message) => {
       const messageData = {
-      username: socket.request.user.username,
-      message: message,
-      avatar: socket.request.user.avatar || 'default-avatar.png', // Add avatar if available
-    };
-      // Save the message in Redis with 1-hour TTL
+        username: socket.request.user.username,
+        message: message,
+        avatar: socket.request.user.avatar || "default-avatar.png",
+        
+      };
+      // Save the message to Redis (lPush to add it to the left of the list)
       redisClient
-        .set(`message:${Date.now()}`, JSON.stringify(messageData), {
-          EX: 3600, // TTL in seconds
+        .lPush("chat_history", JSON.stringify(messageData), () => {
+          redis.expire("chat_history", 3600); // Expires in 1 hour  
         })
         .then(() => {
-          console.log("Message saved to Redis");
+          // Optionally set a TTL (Time to Live) for the chat history
+          redisClient.expire("chat_history", 3600); // Expires after 1 hour
         })
         .catch((err) => {
           console.error("Error saving message to Redis:", err);
         });
-
-      
 
       io.emit("chat message", {
         username: socket.request.user.username,
         message,
       });
     });
-    console.log("A user has connected");
+
     socket.on("disconnect", () => {
       console.log("A user has disconnected");
       --currentUsers;
