@@ -4,8 +4,12 @@ const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const router = express.Router();
+const flash = require('connect-flash');
+
 
 module.exports = function (app, myDataBase) {
+  app.use(flash());
+
   // Home Route
   app.route('/').get((req, res) => {
     res.render('index', {
@@ -64,6 +68,7 @@ module.exports = function (app, myDataBase) {
       },
       passport.authenticate('local', { failureRedirect: '/' }),
       (req, res) => {
+        req.flash('success', 'You have successfully registered!');
         res.redirect('/profile');
       }
     );
@@ -111,6 +116,8 @@ module.exports = function (app, myDataBase) {
   app.use((req, res) => {
     res.status(404).type('text').send('Not Found');
   });
+
+
 };
 
 // Middleware for Authentication

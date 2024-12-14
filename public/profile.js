@@ -1,31 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    require("dotenv").config();
     const quoteElement = document.querySelector('#quote');
     const authorElement = document.querySelector('#author');
     const refreshButton = document.querySelector('#refresh-btn');
   
-    // Function to fetch a random fact (quote)
+    // Function to fetch a random fact (quote) from the server
     const fetchRandomFact = () => {
       quoteElement.textContent = 'Loading fact...';
       authorElement.textContent = '';
       
-      fetch('https://api.api-ninjas.com/v1/quotes', {
-        
-        headers: {
-          'X-Api-Key': process.env.API_KEY, // Replace with your API key
-        },
-      })
+      fetch('/api/random-fact')  // Endpoint on your server
         .then(response => response.json())
         .then(data => {
-          if (data.length === 0) {
+          if (!data || !data.quote) {
             quoteElement.textContent = 'No facts available at the moment.';
             return;
           }
-          
-          const randomFact = data[0];
-          console.log("random fact:", randomFact)
-          quoteElement.textContent = `"${randomFact.quote}"`;
-          authorElement.textContent = `- ${randomFact.author}`;
+         
+          quoteElement.textContent = `"${data.quote}"`;
+          authorElement.textContent = `- ${data.author || 'Unknown'}`;
         })
         .catch(error => {
           console.error('Error fetching fact:', error);
@@ -33,11 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
           authorElement.textContent = '';
         });
     };
-  
+
     // Initial fetch on page load
     fetchRandomFact();
-  
+
     // Refresh button click event to fetch new fact
     refreshButton.addEventListener('click', fetchRandomFact);
-  });
-  
+});

@@ -18,6 +18,11 @@ const GitHubStrategy = require("passport-github").Strategy;
 const { redisClient, getMessagesFromCache, connectRedis } = require("./redis");
 const { SocketAddress } = require("net");
 const { timeStamp } = require("console");
+const flash = require('connect-flash');
+
+// Dynamically import fetchApi
+require('./fetchApi');  // This will execute the fetchApi function inside fetchApi.js
+
 
 app.set("view engine", "pug");
 app.set("views", "./views/pug");
@@ -64,7 +69,6 @@ function onAuthorizeFail(data, message, error, accept) {
   console.log("failed connection to socket.io:", message);
   accept(null, false);
 }
-
 myDB(async (client) => {
   const myDataBase = await client.db("database").collection("users");
 
@@ -76,6 +80,7 @@ myDB(async (client) => {
 
   io.on("connection", (socket) => {
     ++currentUsers;
+    
 
     // Check if the user is already in the onlineUsers array
     const userExists = onlineUsers.some(
