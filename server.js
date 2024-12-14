@@ -18,9 +18,7 @@ const GitHubStrategy = require("passport-github").Strategy;
 const { redisClient, getMessagesFromCache, connectRedis } = require("./redis");
 const { SocketAddress } = require("net");
 const { timeStamp } = require("console");
-const flash = require('connect-flash');
-
-
+const flash = require("connect-flash");
 
 app.set("view engine", "pug");
 app.set("views", "./views/pug");
@@ -73,14 +71,13 @@ myDB(async (client) => {
   routes(app, myDataBase);
   auth(app, myDataBase);
   connectRedis();
-  
+
   let currentUsers = 0;
   let onlineUsers = []; // Keep track of online users
 
   io.on("connection", (socket) => {
     ++currentUsers;
-    
-   
+
     // Check if the user is already in the onlineUsers array
     const userExists = onlineUsers.some(
       (user) => user.username === socket.request.user.username
@@ -136,15 +133,35 @@ myDB(async (client) => {
         message,
       });
     });
-   
-      socket.on('chat image', (data) => {
-        io.emit('chat image', {img:data, messageData:  {
+
+    socket.on("chat image", (data) => {
+      io.emit("chat image", {
+        img: data,
+        messageData: {
           username: socket.request.user.username,
           avatar: socket.request.user.avatar || "default-avatar.png",
           timestamp: new Date(),
-        }} ); // Broadcast the image to all connected clients
+        },
+      }); // Broadcast the image to all connected clients
+    });
+    // Join a private chat room
+    socket.on("join private chat", (roomName) => {
+      socket.join(roomName); // Add the user to the room
+      console.log(
+        `${socket.request.user.username} joined private room: ${roomName}`
+      );
+    });
+
+    // Send a private message to a specific room
+    socket.on("private message", (data) => {
+      const { roomName, message } = data;
+      io.to(roomName).emit("private message", {
+        username: socket.request.user.username,
+        message: message,
+        avatar: socket.request.user.avatar,
       });
-   
+    });
+
     socket.on("disconnect", () => {
       // Find the user in the onlineUsers array and update the status
       const userIndex = onlineUsers.findIndex(
