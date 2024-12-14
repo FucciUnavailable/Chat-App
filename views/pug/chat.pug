@@ -5,6 +5,8 @@ html
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+
     link(rel='stylesheet', href='/public/css/chat.css')
   body
     .container
@@ -34,10 +36,15 @@ html
               form(action='').message-form
                 div.input-group
                   input#m(type='text', autocomplete='off', placeholder='Type your message...', required)
-                  button.btn-primary(type='submit') Send
-                div.upload-group
+                  button.btn-primary(type='submit')
+                    i.fas.fa-paper-plane 
                   input#image-upload(type='file' accept='image/*')
-                  button#send-image.btn-secondary(type='button') Send Image
+                  label#image-upload-label(for='image-upload')
+                    i.fas.fa-upload 
+                    | Upload
+                  button#send-image.btn-secondary(type='button')
+                    i.fas.fa-image 
+                    | Send Image
           .activity-panel
             h3 Announcements
             ul

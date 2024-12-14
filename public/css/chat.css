@@ -254,7 +254,21 @@ button.btn-primary {
 button.btn-primary:hover {
   background-color: #5b6eae;
 }
+button.btn-secondary {
+  background-color: #7289da;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
 
+button.btn-secondary:hover  {
+  background-color: #5b6eae;
+}
 .dot {
   display: inline-block;
   width: 10px;
@@ -269,4 +283,15 @@ button.btn-primary:hover {
 
 .gray {
   background-color: gray;
+}
+
+
+
+#image-upload {
+  opacity:0.1;
+  color:white
+}
+label#image-upload-laber:hover {
+  background-color: #5b6eae;
+  cursor: grab;
 }
