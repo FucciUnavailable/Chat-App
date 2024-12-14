@@ -32,7 +32,7 @@ The app is hosted on **Render**—check it out [https://chat-app-y4bw.onrender.c
 | **Axios**    | Fetching data from external APIs.    |  
 
 ---
-## Screenshots
+## 🖼️ Screenshots
 
 Here are some screenshots of the app in action:
 
@@ -58,7 +58,7 @@ Ensure the following are installed on your system:
 
 ---
 
-### Installation  
+### 📦 Installation  
 
 1. **Clone the Repository**  
    ```bash
@@ -98,7 +98,7 @@ Ensure the following are installed on your system:
     http://localhost:3000
     ```
 
-## Future Enhancements
+## 📝 Future Enhancements
 
 - **User Profile Pages**: Allow users to view and edit their profiles.
 - **Chat History**: Implement a feature to store chat history and allow users to review past conversations.
@@ -107,7 +107,7 @@ Ensure the following are installed on your system:
 - **Dark Mode**: Add a toggle to switch between dark and light themes.
 - **Group Chat**: Add support for group chats where multiple users can join the same chat room.
 
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions! If you'd like to contribute to this project, please follow the steps below:
 
@@ -123,7 +123,7 @@ We welcome contributions! If you'd like to contribute to this project, please fo
 - If you're fixing a bug or implementing a feature, provide detailed information on what was changed and why.
 - Ensure that your code passes all tests before submitting a pull request.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
