@@ -5,8 +5,11 @@ const bcrypt = require('bcryptjs');
 const express = require('express');
 const router = express.Router();
 const flash = require('connect-flash');
+const axios = require('axios')
 
 
+
+const API_KEY = process.env.API_KEY;
 module.exports = function (app, myDataBase) {
   app.use(flash());
 
@@ -29,12 +32,39 @@ module.exports = function (app, myDataBase) {
       res.redirect('/profile');
     }
   );
+  //api route for profile
+  app.get('/api/random-fact', async (req, res) => {
+    try {
+      console.log("trying to fetch quote api")
+      // Use Axios to fetch data
+      const response = await axios.get('https://api.api-ninjas.com/v1/quotes', {
+        headers: {
+          'X-Api-Key': API_KEY,
+        },
+      });
 
+      const data = response.data; // Axios automatically parses JSON
+      console.log("fetched this to server:", data)
+      if (!data || data.length === 0) {
+        return res.json({ quote: 'No facts available at the moment.' });
+      }
+
+      const randomFact = data[0]; // Get the first quote
+      res.json({
+        quote: randomFact.quote,
+        author: randomFact.author,
+      });
+    } catch (error) {
+      console.error('Error fetching fact:', error.message);
+      res.status(500).json({ quote: 'Failed to load fact. Please try again later.' });
+    }
+  });
   // Profile Route
   app.route('/profile').get(ensureAuthenticated, (req, res) => {
+    
     res.render('profile', { username: req.user.username });
   });
-
+ 
   // Logout Route
   app.get('/logout', (req, res) => {
     req.logout();

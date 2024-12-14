@@ -20,8 +20,6 @@ const { SocketAddress } = require("net");
 const { timeStamp } = require("console");
 const flash = require('connect-flash');
 
-// Dynamically import fetchApi
-require('./fetchApi');  // This will execute the fetchApi function inside fetchApi.js
 
 
 app.set("view engine", "pug");
@@ -75,13 +73,14 @@ myDB(async (client) => {
   routes(app, myDataBase);
   auth(app, myDataBase);
   connectRedis();
+  
   let currentUsers = 0;
   let onlineUsers = []; // Keep track of online users
 
   io.on("connection", (socket) => {
     ++currentUsers;
     
-
+   
     // Check if the user is already in the onlineUsers array
     const userExists = onlineUsers.some(
       (user) => user.username === socket.request.user.username
