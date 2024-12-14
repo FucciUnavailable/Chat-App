@@ -7,6 +7,9 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/css/style.css')
   body
+    if query.failure == 'true'
+      script.
+        alert("Login failed. Please check your username and password.");
     .container
       header.header
         h1.logo Fucci Katze

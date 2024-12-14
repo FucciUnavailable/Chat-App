@@ -24,7 +24,7 @@ module.exports = function (app, myDataBase) {
   // Login Route
   app.post(
     '/login',
-    passport.authenticate('local', { failureRedirect: '/' }),
+    passport.authenticate('local', { failureRedirect: '/?failure=true' }),
     (req, res) => {
       res.redirect('/profile');
     }
