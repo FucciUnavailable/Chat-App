@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    require("dotenv").config();
     const quoteElement = document.querySelector('#quote');
     const authorElement = document.querySelector('#author');
     const refreshButton = document.querySelector('#refresh-btn');
@@ -9,8 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
       authorElement.textContent = '';
       
       fetch('https://api.api-ninjas.com/v1/quotes', {
+        
         headers: {
-          'X-Api-Key': 'RPdCpiLIu73qxNynd+3oWw==O434wfubsAfuIHg2', // Replace with your API key
+          'X-Api-Key': process.env.API_KEY, // Replace with your API key
         },
       })
         .then(response => response.json())
