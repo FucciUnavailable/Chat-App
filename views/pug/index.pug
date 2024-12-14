@@ -7,9 +7,7 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/public/css/style.css')
   body
-    if failure == 'true'
-      script.
-        alert("Login failed. Please check your username and password.");
+    
     .container
       header.header
         h1.logo Fucci Katze
@@ -35,6 +33,21 @@ html
               a.social-btn(href='/auth/github')
                 img(src='/public/github-icon.png', alt='GitHub')
                 | GitHub
+                
+              // Display error messages based on conditions
+              if failureToLogIn
+                .error-message
+                  p Login failed. Please check your username and/or password
+              if failureToSignUpClient
+                .error-message
+                  p User with this username already exists. Please choose another username.
+              if failureToSignUpServer
+                .error-message
+                  p Something went wrong, but it's our fault. Please try again later. Sorry for the inconvenience.
+              if successToSignUp
+                .success-message
+                  p Thank you for signing up! Please proceed to log in.   
+
 
         if showRegistration
           .box.register-box
@@ -53,3 +66,7 @@ html
 
       footer.footer
         p.center-text &copy; 2024 Fucci Katze. All rights reserved.
+
+
+
+
