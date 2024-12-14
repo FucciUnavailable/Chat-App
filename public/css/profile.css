@@ -59,7 +59,7 @@ body {
   gap: 20px;
 }
 
-.profile-section, .friends-section, .chat-section {
+.profile-section, .chat-section {
   background-color: #23272a;
   border-radius: 10px;
   padding: 20px;
@@ -108,51 +108,6 @@ body {
   background-color: #5b6eae;
 }
 
-.friends-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.friend {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px;
-  background-color: #2c2f33;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.friend:hover {
-  background-color: #3b4148;
-}
-
-.friend-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-.add-friend-btn {
-  margin-top: 10px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: #ffffff;
-  background-color: #43b581;
-  padding: 8px 15px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.add-friend-btn:hover {
-  background-color: #2ea763;
-}
 
 .chat-buttons {
   display: flex;
@@ -189,20 +144,43 @@ input#room-id {
   font-size: 1rem;
 }
 
-.decorative-section {
+.fact-box {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
   width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
   text-align: center;
-  margin-top: 20px;
 }
 
-.decorative-section .tagline {
-  font-size: 1.25rem;
-  color: #7289da;
+.fact-content {
+  margin-bottom: 15px;
 }
 
-.decorative-section .decorative-img {
-  margin-top: 10px;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 10px;
+#quote {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+#author {
+  font-size: 1rem;
+  color: #555;
+}
+
+#refresh-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#refresh-btn:hover {
+  background-color: #0056b3;
 }

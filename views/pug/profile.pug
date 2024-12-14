@@ -35,23 +35,13 @@ html
               i.fas.fa-edit
               | Edit Profile
 
-        // Friends Section
-        .friends-section
-          h3.section-title Your Friends
-          ul.friends-list
-            li.friend
-              img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
-              span.friend-name John Doe
-            li.friend
-              img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
-              span.friend-name Jane Smith
-            li.friend
-              img.friend-img(src='/public/images/default-profile.png', alt='Friend Picture')
-              span.friend-name Alex Johnson
-          a.add-friend-btn(href='#')
-            i.fas.fa-user-plus
-            | Add Friend
-
+          //Fact Box Section
+          .div.fact-box
+            h3.section-title Random Quote
+            .fact-content
+              p#quote "Loading quote..."
+              p#author ""
+            button#refresh-btn Refresh 
         // Chat Options Section
         .chat-section
           h3.section-title Chat Options
@@ -72,4 +62,4 @@ html
 
     // Scripts
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', integrity='sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=', crossorigin='anonymous')
-    script(src='/public/js/profile.js')
+    script(async, defer, src='/public/profile.js')
