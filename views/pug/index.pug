@@ -11,7 +11,8 @@ html
     .container
       header.header
         h1.logo Fucci Katze
-        p.subtitle Welcome to the coolest platform!
+        p.subtitle Welcome to my chat Platform!
+        p.subtitle Where you can chat and send images privately.
       
       main.main-content
         if showLogin
@@ -34,19 +35,6 @@ html
                 img(src='/public/github-icon.png', alt='GitHub')
                 | GitHub
                 
-              // Display error messages based on conditions
-              if failureToLogIn
-                .error-message
-                  p Login failed. Please check your username and/or password
-              if failureToSignUpClient
-                .error-message
-                  p User with this username already exists. Please choose another username.
-              if failureToSignUpServer
-                .error-message
-                  p Something went wrong, but it's our fault. Please try again later. Sorry for the inconvenience.
-              if successToSignUp
-                .success-message
-                  p Thank you for signing up! Please proceed to log in.   
 
 
         if showRegistration
@@ -63,6 +51,20 @@ html
                 input#reg-password(type='password', name='password', placeholder='Choose a password', required)
               .form-group
                 button.btn-secondary(type='submit') Register
+              // Display error messages based on conditions
+              if failureToLogIn
+                .error-message
+                  p Login failed. Please check your username and/or password
+              if failureToSignUpClient
+                .error-message
+                  p User with this username already exists. Please choose another username.
+              if failureToSignUpServer
+                .error-message
+                  p Something went wrong, but it's our fault. Please try again later. Sorry for the inconvenience.
+              if successToSignUp
+                .success-message
+                  p Thank you for signing up!
+                  p Procceed to Log In. 
 
       footer.footer
         p.center-text &copy; 2024 Fucci Katze. All rights reserved.

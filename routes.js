@@ -71,7 +71,7 @@ module.exports = function (app, myDataBase) {
         failureToLogIn: false,
         failureToSignUpClient: false,
         failureToSignUpServer: false,
-        successToSignUp:True
+        successToSignUp:true
       });
     });
   
