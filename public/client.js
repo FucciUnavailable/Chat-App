@@ -1,6 +1,6 @@
 $(document).ready(function () {
   let socket = io();
-
+  //sockets for santa
   socket.on("user", (data) => {
     $("#num-users").text(data.currentUsers + " users online");
     let message =
@@ -82,6 +82,34 @@ $(document).ready(function () {
     newMessage.scrollIntoView({ behavior: "smooth", block: "end" });
   });
 
+
+  socket.on("chat image", function (data) {
+    console.log(data);
+    const chatBox = document.getElementById("messages");
+    const newMessage = document.createElement("li");
+    const timestamp = new Date().toLocaleTimeString();
+
+    
+     newMessage.innerHTML = `
+      <div class="message-container">
+        <img class="avatar" src="${data.avatar || "default-avatar.png"}" alt="${
+      data.username
+    }" />
+        <div class="message-content">
+          <span class="username"><b>${data.messageData.username}</b></span>
+          <img src="${data.img.image}" alt="Uploaded image" style="max-width: 300px; border-radius: 8px;" />
+          <span class="timestamp">${timestamp}</span>
+        </div>
+      </div>
+    `;
+
+    chatBox.appendChild(newMessage);
+    newMessage.scrollIntoView({ behavior: "smooth", block: "end" });
+  });
+
+
+
+  //functions
   function scrollToBottom() {
     const chatBox = document.getElementById("messages");
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -91,8 +119,25 @@ $(document).ready(function () {
     let messageToSend = $("#m").val();
     socket.emit("chat message", messageToSend);
     $("#m").val("");
+    
     return false;
+    
   });
-
+  document.getElementById('send-image').addEventListener('click', () => {
+    const fileInput = document.getElementById('image-upload');
+    const file = fileInput.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64Image = reader.result; // Convert the image to base64
+        socket.emit('chat image', { image: base64Image });
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+    }
+  });
+ 
+  
+  
   window.onload = scrollToBottom;
 });

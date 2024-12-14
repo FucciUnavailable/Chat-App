@@ -32,9 +32,12 @@ html
               ul#messages
                 // Messages will be inserted here dynamically
               form(action='').message-form
-                input#m(type='text', autocomplete='off', placeholder='Type your message...', required)
-                button.btn-primary Send
-            
+                div.input-group
+                  input#m(type='text', autocomplete='off', placeholder='Type your message...', required)
+                  button.btn-primary(type='submit') Send
+                div.upload-group
+                  input#image-upload(type='file' accept='image/*')
+                  button#send-image.btn-secondary(type='button') Send Image
           .activity-panel
             h3 Announcements
             ul

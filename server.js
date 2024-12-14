@@ -132,7 +132,15 @@ myDB(async (client) => {
         message,
       });
     });
-
+   
+      socket.on('chat image', (data) => {
+        io.emit('chat image', {img:data, messageData:  {
+          username: socket.request.user.username,
+          avatar: socket.request.user.avatar || "default-avatar.png",
+          timestamp: new Date(),
+        }} ); // Broadcast the image to all connected clients
+      });
+   
     socket.on("disconnect", () => {
       // Find the user in the onlineUsers array and update the status
       const userIndex = onlineUsers.findIndex(
