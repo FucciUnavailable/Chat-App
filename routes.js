@@ -163,7 +163,7 @@ module.exports = function (app, myDataBase) {
     "/auth/github/callback",
     passport.authenticate("github", { failureRedirect: "/" }),
     (req, res) => {
-      res.redirect("/chat");
+      res.redirect("/profile");
     }
   );
 

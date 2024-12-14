@@ -11,7 +11,7 @@ body {
 }
 
 .header {
-  width: 100%;
+  width: 86%;
   background-color: #23272a;
   padding: 20px;
   display: flex;
@@ -55,8 +55,10 @@ body {
   max-width: 1000px;
   margin-top: 30px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   gap: 20px;
+
 }
 
 .profile-section, .chat-section {
@@ -64,6 +66,8 @@ body {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .section-title {
@@ -149,7 +153,7 @@ input#room-id {
   padding: 20px;
   border-radius: 8px;
   border: 1px solid #ddd;
-  width: 100%;
+  width: 80%;
   max-width: 400px;
   margin: 20px auto;
   text-align: center;
